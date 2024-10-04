@@ -18,6 +18,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class DBConfiguration {
+	
     @Autowired
     private ApplicationContext applicationContext;
 

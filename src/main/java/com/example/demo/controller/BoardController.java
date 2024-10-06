@@ -1,5 +1,10 @@
 package com.example.demo.controller;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> cbfc996 (a)
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -50,4 +55,18 @@ public class BoardController {
 		}
 		return "redirect:/board/list.do";
 	}
+<<<<<<< HEAD
+=======
+	
+	@GetMapping(value="/board/list.do")
+	public String openBoardList(Model model) {
+		List<BoardDTO> boardList = boardService.getBoardList();
+		for(BoardDTO board : boardList) {
+			System.out.println(board);
+		}
+		model.addAttribute("boardList", boardList);
+		return "board/list";
+		
+	}
+>>>>>>> cbfc996 (a)
 }

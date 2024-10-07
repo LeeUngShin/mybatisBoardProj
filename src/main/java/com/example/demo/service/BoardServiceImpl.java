@@ -7,11 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.BoardDTO;
-<<<<<<< HEAD
-import com.example.demo.mapper.BoardMapper;
-=======
 import com.example.demo.mappers.BoardMapper;
->>>>>>> cbfc996 (a)
 
 @Service
 public class BoardServiceImpl implements BoardService{

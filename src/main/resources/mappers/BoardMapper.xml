@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<mapper namespace="mappers.BoardMapper">
-
-</mapper>
-=======
-<mapper namespace="com.example.demo.mapper.BoardMapper">
-	
-=======
 <mapper namespace="com.example.demo.mappers.BoardMapper">
 
->>>>>>> cbfc996 (a)
 	<sql id="boardColumns">
 		idx
 		, title
@@ -100,12 +90,5 @@
 		WHERE
 			delete_yn = 'N'
 	</select>
-<<<<<<< HEAD
-	
-
 </mapper>
->>>>>>> dedcd92 (board write process)
-=======
 
-</mapper>
->>>>>>> cbfc996 (a)

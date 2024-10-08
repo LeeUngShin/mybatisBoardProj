@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/test/inputRegister}" th:object="${inputTestDTO}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" />
+    </div>
+
+    <div>
+        <label>Favorite Food:</label>
+        <div>
+            <label>
+                <input type="radio" th:field="*{food}" value="pizza" /> Pizza
+            </label>
+            <label>
+                <input type="radio" th:field="*{food}" value="sushi" /> Sushi
+            </label>
+            <label>
+                <input type="radio" th:field="*{food}" value="burger" /> Burger
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label>Hobbies:</label>
+        <div>
+            <label>
+                <input type="checkbox" th:field="*{hobbies}" value="reading" /> Reading
+            </label>
+            <label>
+                <input type="checkbox" th:field="*{hobbies}" value="traveling" /> Traveling
+            </label>
+            <label>
+                <input type="checkbox" th:field="*{hobbies}" value="gaming" /> Gaming
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label for="content">Content:</label>
+        <textarea id="content" th:field="*{content}"></textarea>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

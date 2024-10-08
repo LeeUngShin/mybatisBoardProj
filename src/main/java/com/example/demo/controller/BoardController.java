@@ -25,12 +25,12 @@ public class BoardController extends UiUtils{
 	@GetMapping (value = "/board/write.do")
 	public String openBoardWrite(@RequestParam(value="idx", required = false) Long idx, 
 									Model model) {
-		
-		if(idx == null) {
+		System.out.println("작성폼 열 때 : " + idx);
+		if(idx == null) {  // 새 게시글 작성
 			model.addAttribute("board", new BoardDTO());
 		}
-		else {
-			BoardDTO board = boardService.getBoardDetail(idx);
+		else {  // 기존 게시글
+			BoardDTO board = boardService.getBoardDetail(idx);  // 게시글 정보 가져오기
 			if(board == null) {
 				return "redirect:/board/list.do";
 			}

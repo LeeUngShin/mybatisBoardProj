@@ -82,11 +82,11 @@
 			</div>
 		</div>
 	</th:block>
-	<th:block layout:fragment="script">
+	<th:block layout:fragment="script">  <!-- 이 페이지에서만 적용되는 js -->
 		<script th:inline="javascript">
 			function deleteBoard(idx, queryString) {
 				if (confirm(idx + "번 게시글을 삭제할까요?")) {
-					var uri = /*[[ @{/board/delete.do} ]]*/ null;
+					var uri = /*[[ @{/board/delete.do} ]]*/ null;  // 컨트롤러에 /board/delete.do 있으면 /board/delete.do 없으면 null
 					
 					var html = "";
 					
@@ -94,14 +94,14 @@
 					html += '<input type="hidden" name="idx" value="'+idx+'" />';
 			
 					/*[- 쿼리 스트링을 오브젝트 형태로 변환 -]*/
-					queryString = new URLSearchParams(queryString);
-					console.log(queryString);
-					queryString.forEach(function(value, key) {
-						if (isEmpty(value) == false) {
-							html += '<input type="hidden" name="' + key + '" value="' + value + '" />';
-						}
-					});
-			
+					//queryString = new URLSearchParams(queryString);
+					//console.log(queryString);
+					//queryString.forEach(function(value, key) {
+					//	if (isEmpty(value) == false) {
+					//		html += '<input type="hidden" name="' + key + '" value="' + value + '" />';
+					//	}
+					//});
+
 					html += '</form>';
 			
 					$("body").append(html);

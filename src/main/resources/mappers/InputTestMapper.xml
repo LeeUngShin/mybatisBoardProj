@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mappers.InputTestMapper">
+
+	<sql id="inputTestColumns">
+		idx,
+		name,
+		email,
+		food,
+		hobbiesString,
+		content
+	</sql>
+	
+	<insert id="insertInputTest" parameterType="InputTestDTO">
+		INSERT INTO inputTest(
+			<include refid="inputTestColumns"/>
+		) values (
+			#{idx},
+			#{name},
+			#{email},
+			#{food},
+			#{hobbiesString},
+			#{content}
+			 
+		)
+	</insert>
+	
+	<select id="selectInputTest" parameterType="long" resultType="InputTestDTO">
+		SELECT 
+			<include refid="inputTestColumns"/>
+		FROM
+			inputTest
+		WHERE
+			idx = #{idx}
+	</select>
+</mapper>
+

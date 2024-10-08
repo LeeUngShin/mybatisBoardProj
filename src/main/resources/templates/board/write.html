@@ -6,41 +6,41 @@
 	
 	<th:block layout:fragment="content">
 		<div class="card-content">
-			<form class="form-horizontal" th:action="@{/board/register.do}" th:object="${board}" method="post" onsubmit="return registerBoard(this)">
-				<input type="hidden" th:if="*{idx != null and idx > 0}" th:field="*{idx}">
+			<form class="form-horizontal" th:action="@{/board/register.do}" th:object="${board}" method="post" onsubmit="return registerBoard(this)"> <!-- board : model로 보낸 객체, onsubmit이 true 일 때만 submit -->
+				<input type="hidden" th:if="*{idx != null and idx > 0}" th:field="*{idx}"> 	<!-- if문이 참일 때만 input 서버와 렌더링 -->
 				
 				<div class="form-group">
 					<label for="noticeYn" class="col-sm-2 control-label">공지글 설정</label>
 					<div class="col-sm-10" style="margin-top : 10px;">
-						<input type="checkbox" th:value="*{noticeYn}" id="noticeYn" name="noticeYn" th:checked="*{#strings.equals(noticeYn, 'Y')}" />
+						<input type="checkbox" th:value="*{noticeYn}" id="noticeYn" name="noticeYn" th:checked="*{#strings.equals(noticeYn, 'Y')}" /> <!-- noticeYn이 'Y'이면 checked 활성화 -->
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="secretYn" class="col-sm-2 control-label">비밀글 설정</label>
 					<div class="col-sm-10" style="margin-top : 10px;">
-						<input type="checkbox" th:value="*{secretYn}" id="secretYn" name="secretYn" th:checked="*{#strings.equals(secretYn, 'Y')}" />
+						<input type="checkbox" th:value="*{secretYn}" id="secretYn" name="secretYn" th:checked="*{#strings.equals(secretYn, 'Y')}" /> <!-- noticeYn이 'Y'이면 checked 활성화 -->
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="title" class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-10" style="margin-top : 10px;">
-						<input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력해 주세요" />
+						<input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력해 주세요" />  <!-- board객체의 title / id,name : title, value : title의 값 -->
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="writer" class="col-sm-2 control-label">이름</label>
 					<div class="col-sm-10">
-						<input type="text" th:field="*{writer}" class="form-control" placeholder="이름을 입력해 주세요" />
+						<input type="text" th:field="*{writer}" class="form-control" placeholder="이름을 입력해 주세요" />  <!-- board객체의 *{writer} / id,name : writer, value : writer의 값 -->
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="content" class="col-sm-2 control-label">내용</label>
 					<div class="col-sm-10">
-						<textarea th:field="*{content}" class="form-control" placeholder="내용을 입력해 주세요" ></textarea>
+						<textarea th:field="*{content}" class="form-control" placeholder="내용을 입력해 주세요" ></textarea>  <!-- board객체의 *{*{content}} / id,name : content, value : content의 값 -->
 					</div>
 				</div>
 				
@@ -52,22 +52,44 @@
 		</div>
 	</th:block>
 	
-	<th:block layout:fragment="script">
+	<th:block layout:fragment="script">  <!-- 이 페이지에만 해당하는 js 추가 -->
 		<script th:inline="javascript">
 			function registerBoard(form){
-				form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';  // noticeYn : name 값
-				form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';  // secretYn : name 값
+				form.noticeYn.value = form.noticeYn.checked == false ? 'N' : 'Y';  // 체크하면 'Y', 안하면 'N'
+				form.secretYn.value = form.secretYn.checked == false ? 'N' : 'Y';  // 체크하면 'Y', 안하면 'N'   
 				
-				var result = (
-					isValid(form.title, "제목", null, null)
-					&& isValid(form.writer, "이름", null, null)
-					&& isValid(form.content, "내용", null, null)
+				var result = (  // 빈칸 방지
+					isValid(form.title, "제목", null)
+					&& isValid(form.writer, "이름", null)
+					&& isValid(form.content, "내용", null)
 				);
 				
 				if(result == false){
 					return false;
 				}
 			}
+			
+			
+			/**
+			 * field의 값이 올바른 형식인지 체크 (정규표현식 사용)
+			 * 
+			 * @param field - 타겟 필드
+			 * @param fieldName - 필드 이름 (null 허용)
+			 * @param focusField - 포커스할 필드 (null 허용)
+			 * @returns 메시지
+			 */
+			//function isValid(field, fieldName, focusField) {
+			//
+			//	if (isEmpty(field.value) == true) {
+			//		/* 종성으로 조사(을 또는 를) 구분 */
+			//		var message = (charToUnicode(fieldName) > 0) ? fieldName + "을 확인해 주세요." : fieldName + "를 확인해 주세요."; 
+			//		field.focus();
+			//		alert(message);
+			//		return false;
+			//	}
+			//	return true;
+			//}
+			
 		</script>
 	</th:block>
 </html>

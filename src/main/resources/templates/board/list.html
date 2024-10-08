@@ -26,16 +26,16 @@
 			        </tr>
 			    </thead>
 			    <tbody>
-			        <tr th:if="${not #lists.isEmpty(boardList)}" th:each="row : ${boardList}">
-			            <td scope="row" th:text="${#strings.equals(row.noticeYn, 'Y') ? '공지' : row.idx}"></td>
+			        <tr th:if="${not #lists.isEmpty(boardList)}" th:each="row : ${boardList}"> <!-- ()에는 컬렉션 프레임워크가 옴, if문이 참이면 boardList가 하나씩 반복 -->
+			            <td scope="row" th:text="${#strings.equals(row.noticeYn, 'Y') ? '공지' : row.idx}"></td>  
 			            <td class="text-left">
-			                <a th:href="@{/board/view.do(idx=${row.idx})}" th:text="${row.title}"></a>
-			            </td>
+			                <a th:href="@{/board/view.do(idx=${row.idx})}" th:text="${row.title}"></a>  <!-- 타임리프에서 url에 파라미터 추가 : /board/view.do( idx=${idx}, page=${page} ) -->
+			            </td>																			<!-- 위에처럼 보내면 : /board/view.do?idx=...&page=... -->	
 			            <td th:text="${row.writer}"></td>
-			            <td th:text="${#temporals.format(row.insertTime, 'yyyy-MM-dd')}"></td>
+			            <td th:text="${#temporals.format(row.insertTime, 'yyyy-MM-dd')}"></td>  <!-- localDateTime을 원하는 포맷으로 -->
 			            <td th:text="${row.viewCnt}"></td>
 			        </tr>
-			        <tr th:unless="${not #lists.isEmpty(boardList)}">
+			        <tr th:unless="${not #lists.isEmpty(boardList)}">  <!-- boardList가 비어있으면, th:unless는 th:if와 동일한 조건이 들어가야 함 --> 
 			            <td colspan="5">조회된 결과가 없습니다.</td>
 			        </tr>
 			    </tbody>

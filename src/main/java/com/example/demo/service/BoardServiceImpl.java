@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.BoardDTO;
 import com.example.demo.mappers.BoardMapper;
 import com.example.demo.paging.Criteria;
+import com.example.demo.paging.PaginationInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -46,15 +48,33 @@ public class BoardServiceImpl implements BoardService{
 		return queryResult==1 ? true : false;
 	}
 
+//	@Override
+//	public List<BoardDTO> getBoardList(BoardDTO params) {
+//		
+//		List<BoardDTO> boardList = new ArrayList<>();
+//		int boardTotalCount = boardMapper.selectBoardTotalCount(params);
+//		if(boardTotalCount > 0) {  // 게시글이 하나 이상이면
+//			boardList = boardMapper.selectBoardList(params);
+//		}
+//		
+//		return boardList;
+//	}
+	
 	@Override
 	public List<BoardDTO> getBoardList(BoardDTO params) {
+		// TODO Auto-generated method stub
+		List<BoardDTO> boardList = Collections.emptyList();
 		
-		List<BoardDTO> boardList = new ArrayList<>();
 		int boardTotalCount = boardMapper.selectBoardTotalCount(params);
-		if(boardTotalCount > 0) {  // 게시글이 하나 이상이면
+		
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(boardTotalCount);
+		
+		params.setPaginationInfo(paginationInfo);
+		
+		if(boardTotalCount > 0) {
 			boardList = boardMapper.selectBoardList(params);
 		}
-		
 		return boardList;
 	}
 	

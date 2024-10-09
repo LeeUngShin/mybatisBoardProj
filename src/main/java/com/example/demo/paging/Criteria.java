@@ -8,40 +8,88 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
 public class Criteria {
+	private int currentPageNo;
+	private int recordsPerPage;
+	private int recordsPage;
+	private int pageSize;
+	private String searchKeyword;
+	private String searchType;
 	
-	private int currentPageNo;  // 현재 페이지번호
-	private int recordsPerPage;  // 한 페이지당 보여줄 개수
-	private int pageSize;  // 하단에 있는 선택 페이지 개수
-	private String searchKeyword;  // 검색어
-	private String searchType;  // 검색유형
-	
-	public Criteria() {  // Criteria 객체 생성시 초기화
-		 this.currentPageNo = 1;
-		 this.recordsPerPage = 10;
-		 this.pageSize = 10;
+	public Criteria() {
+		this.currentPageNo = 1;
+		this.recordsPerPage = 10;
+		this.pageSize = 10;
 	}
 	
-	public int getStartPage() {  // MySQL에서 LIMIT 구문의 앞부분에 사용되는 메서드
-		return (currentPageNo - 1) * recordsPerPage; 
+	public int getStartPage() {
+		return (currentPageNo - 1) * recordsPerPage;
 	}
 	
 	public String makeQueryString(int pageNo) {
-		
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 				.queryParam("currentPageNo", pageNo)
 				.queryParam("recordsPerPage", recordsPerPage)
 				.queryParam("pageSize", pageSize)
 				.queryParam("searchType", searchType)
 				.queryParam("searchKeyword", searchKeyword)
-				.build()
-				.encode();
-		
+				.build().encode();
+		System.out.println(">>>>>>>>>>"+uriComponents.toUriString());
 		return uriComponents.toUriString();
-				
+	}
+
+	public int getCurrentPageNo() {
+		return currentPageNo;
+	}
+
+	public void setCurrentPageNo(int currentPageNo) {
+		this.currentPageNo = currentPageNo;
+	}
+
+	public int getRecordsPerPage() {
+		return recordsPerPage;
+	}
+
+	public void setRecordsPerPage(int recordsPerPage) {
+		this.recordsPerPage = recordsPerPage;
+	}
+
+	public int getRecordsPage() {
+		return recordsPage;
+	}
+
+	public void setRecordsPage(int recordsPage) {
+		this.recordsPage = recordsPage;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	@Override
+	public String toString() {
+		return "Criteria [currentPageNo=" + currentPageNo + ", recordsPerPage=" + recordsPerPage + ", recordsPage="
+				+ recordsPage + ", pageSize=" + pageSize + ", searchKeyword=" + searchKeyword + ", searchType="
+				+ searchType + "]";
 	}
 }

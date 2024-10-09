@@ -69,7 +69,7 @@
 			idx = #{idx}
 	</update>
 	
-	<select id="selectBoardList" resultType = "BoardDTO">
+	<select id="selectBoardList" parameterType="BoardDTO" resultType = "BoardDTO">
 		SELECT
 			<include refid="boardColumns"/>
 		FROM
@@ -80,9 +80,11 @@
 			notice_yn ASC,
 			idx DESC,
 			insert_time DESC
+		LIMIT  <!-- 시작 행(0부터 시작하므로 10이면 11행부터), 가져올 행 개수 -->
+			11, #{recordsPerPage}
 	</select>
 	
-	<select id="selectBoardTotalCount" resultType = "int">
+	<select id="selectBoardTotalCount" parameterType="BoardDTO" resultType = "int">
 		SELECT
 			COUNT(*)
 		FROM

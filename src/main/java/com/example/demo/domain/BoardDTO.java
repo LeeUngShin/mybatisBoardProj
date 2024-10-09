@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDTO {
+public class BoardDTO extends CommonDTO{
 
     private Long idx;
     private String title;
@@ -24,8 +24,4 @@ public class BoardDTO {
     private int viewCnt;
     private String noticeYn;
     private String secretYn;
-    private String deleteYn;
-    private LocalDateTime insertTime;
-    private LocalDateTime updateTime;
-    private LocalDateTime deleteTime;
 }

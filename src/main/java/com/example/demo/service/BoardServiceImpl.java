@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.BoardDTO;
 import com.example.demo.mappers.BoardMapper;
+import com.example.demo.paging.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -46,12 +47,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardDTO> getBoardList() {
+	public List<BoardDTO> getBoardList(BoardDTO params) {
 		
 		List<BoardDTO> boardList = new ArrayList<>();
-		int boardTotalCount = boardMapper.selectBoardTotalCount();
+		int boardTotalCount = boardMapper.selectBoardTotalCount(params);
 		if(boardTotalCount > 0) {  // 게시글이 하나 이상이면
-			boardList = boardMapper.selectBoardList();
+			boardList = boardMapper.selectBoardList(params);
 		}
 		
 		return boardList;
